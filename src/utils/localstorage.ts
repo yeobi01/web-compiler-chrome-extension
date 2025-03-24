@@ -9,7 +9,7 @@ const storage = {
     if (!localStorage) return null;
 
     if (!localStorage[key]) {
-      return [];
+      return null;
     }
 
     try {
