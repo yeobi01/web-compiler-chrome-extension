@@ -2,7 +2,7 @@ export default function OutputBox() {
   return (
     <div className="h-1/4 flex flex-col px-4 items-start">
       <div className="flex flex-row w-full justify-between items-center mb-2">
-        <p className="font-bold text-gray-300">실행 결과</p>
+        <div className="font-bold text-gray-300">실행 결과</div>
       </div>
       <div className="flex flex-col h-full w-full overflow-y-scroll output-scroll pr-2">
         {outputData ? null : (
