@@ -19,7 +19,7 @@ export default function InputModal({ setInputToggle }: InputModalProps) {
   };
 
   useEffect(() => {
-    setUserInputData(storage.get("userInputData"));
+    setUserInputData(storage.get("userInputData") ?? []);
   }, []);
 
   useEffect(() => {
