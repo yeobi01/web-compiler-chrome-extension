@@ -15,6 +15,7 @@ export default function MonacoEditor({ codeState }: MonacoEditorProps) {
     <Editor
       theme="vs-dark"
       defaultLanguage="cpp"
+      height="75%"
       options={{ wordWrap: "on", minimap: { enabled: false } }}
       value={codeState.code}
       onChange={(value) => codeState.setCode(value || "")}
