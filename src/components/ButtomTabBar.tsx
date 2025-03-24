@@ -1,7 +1,14 @@
-export default function ButtomTabBar() {
+interface ButtomTabBarProps {
+  setInputToggle: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function ButtomTabBar({ setInputToggle }: ButtomTabBarProps) {
   return (
     <div className="flex flex-row items-center gap-2 self-end h-[3rem] mt-2">
-      <p className="py-2 px-3 bg-[#1E1E1E] text-[0.9rem] text-gray-300 font-bold rounded-md cursor-pointer">
+      <p
+        className="py-2 px-3 bg-[#1E1E1E] text-[0.9rem] text-gray-300 font-bold rounded-md cursor-pointer"
+        onClick={() => setInputToggle((prev) => !prev)}
+      >
         테스트 케이스 추가
       </p>
       <p className="py-2 px-3 bg-[#1E1E1E] text-[0.9rem] text-gray-300 font-bold rounded-md cursor-pointer">
