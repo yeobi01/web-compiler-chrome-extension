@@ -15,13 +15,26 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+.output-border {
+  /* border-gray-600 border-1 */
+  border: 1px solid rgba(107, 107, 107, 0.4);
 }
-a:hover {
-  color: #535bf2;
+
+.output-border + .output-border {
+  border-top: none;
+}
+
+.output-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.output-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.output-scroll::-webkit-scrollbar-thumb {
+  background-color: rgba(107, 107, 107, 0.3);
+  border-radius: 4px;
 }
 
 body {
