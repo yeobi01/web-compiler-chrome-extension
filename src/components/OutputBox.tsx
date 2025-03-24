@@ -9,7 +9,7 @@ export default function OutputBox() {
           <p className="self-start">실행 결과가 여기에 표시됩니다.</p>
         )}
         {outputData.map((data, index) => (
-          <p className="w-full flex flex-col items-start p-2 text-[0.9rem] output-border whitespace-pre-line">
+          <div className="w-full flex flex-col items-start p-2 text-[0.9rem] output-border whitespace-pre-line">
             <p className="font-bold text-gray-300">테스트 {index}</p>
             <div className="w-full flex flex-row">
               <p className="w-1/5 min-w-24 text-right text-gray-600 px-2">
@@ -33,7 +33,7 @@ export default function OutputBox() {
                 {data.realOutput}
               </p>
             </div>
-          </p>
+          </div>
         ))}
       </div>
     </div>
