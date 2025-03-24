@@ -17,6 +17,7 @@
     "monaco-editor": "^0.52.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-icons": "^5.5.0",
     "tailwindcss": "^4.0.12"
   },
   "devDependencies": {
