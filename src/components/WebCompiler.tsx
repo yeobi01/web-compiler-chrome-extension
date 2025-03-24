@@ -5,7 +5,7 @@ import OutputBox from "./OutputBox";
 import ButtomTabBar from "./ButtomTabBar";
 
 export default function WebCompiler() {
-  const [code, setCode] = useState(
+  const [code, setCode] = useState<string>(
     "// 0번. 문제 이름\n\n#include <bits/stdc++.h>\nusing namespace std;\ntypedef long long ll;\n\nint main(){\n\tcin.tie(0)->sync_with_stdio(0);\n\n\treturn 0;\n}"
   );
   const [inputToggle, setInputToggle] = useState(false);
