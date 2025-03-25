@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { IoClose } from "react-icons/io5";
 import storage from "../utils/localstorage";
 
@@ -12,19 +12,38 @@ interface InputData {
 }
 
 export default function InputModal({ setInputToggle }: InputModalProps) {
+  const [inputData, setInputData] = useState<InputData[]>([]);
   const [userInputData, setUserInputData] = useState<InputData[]>([]);
+
+  const inputRefs = useRef<(HTMLTextAreaElement | null)[]>([]);
+  const outputRefs = useRef<(HTMLTextAreaElement | null)[]>([]);
 
   const addUserInputData = () => {
     setUserInputData((prev) => [...prev, { input: "", expectOutput: "" }]);
   };
 
   useEffect(() => {
+    setInputData(storage.get("inputData") ?? []);
     setUserInputData(storage.get("userInputData") ?? []);
   }, []);
 
   useEffect(() => {
     if (userInputData.length === 0) return;
     storage.set("userInputData", userInputData);
+
+    inputRefs.current.forEach((inputRef) => {
+      if (inputRef) {
+        inputRef.style.height = "auto";
+        inputRef.style.height = `${inputRef.scrollHeight}px`;
+      }
+    });
+
+    outputRefs.current.forEach((outputRef, index) => {
+      if (outputRef) {
+        outputRef.style.height = "auto";
+        outputRef.style.height = `${inputRefs.current[index]?.scrollHeight}px`;
+      }
+    });
   }, [userInputData]);
 
   return (
@@ -33,7 +52,7 @@ export default function InputModal({ setInputToggle }: InputModalProps) {
       onClick={() => setInputToggle((prev) => !prev)}
     >
       <div
-        className="flex flex-col items-center w-5/6 bg-white py-4 px-6 rounded-xl"
+        className="flex flex-col items-center w-5/6 max-h-11/12 bg-white py-4 px-6 rounded-xl overflow-y-scroll input-scroll"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex flex-row justify-between w-full">
@@ -73,12 +92,12 @@ export default function InputModal({ setInputToggle }: InputModalProps) {
               <div className="flex flex-row w-full">
                 <div className="w-3/5 px-4 py-2 border-r-1 border-[#D7E2EB]">
                   <div className="w-full h-full flex py-2 px-4 justify-start bg-[#E9ECF2] text-gray-600 rounded-sm">
-                    <p>{data.input}</p>
+                    <p className="text-left">{data.input}</p>
                   </div>
                 </div>
                 <div className="w-2/5 px-4 py-2">
                   <div className="w-full h-full flex py-2 px-4 justify-start bg-[#E9ECF2] text-gray-600 rounded-sm">
-                    <p>{data.expectOutput}</p>
+                    <p className="text-left">{data.expectOutput}</p>
                   </div>
                 </div>
               </div>
@@ -86,17 +105,19 @@ export default function InputModal({ setInputToggle }: InputModalProps) {
           ))}
           {userInputData.map((data, index) => (
             <>
+              {/* 사용자 input, output 한 쌍 */}
               <hr className="w-[calc(100%-1rem)] border-1/2 border-[#D7E2EB] border-dotted" />
-              <div className="flex flex-row w-full">
-                <div className="w-3/5 px-4 py-2 border-r-1 border-[#D7E2EB]">
+              <div className="flex flex-row w-full items-center">
+                <div className="w-3/5 px-4 py-2 border-r-1 border-[#D7E2EB] flex flex-row items-center justify-between">
                   <textarea
+                    ref={(el) => {
+                      inputRefs.current[index] = el;
+                    }}
                     className="w-full resize-none overflow-hidden py-2 px-4 bg-[#E9ECF2] text-gray-600 rounded-sm"
                     rows={1}
                     value={data.input}
                     onInput={(e) => {
                       const target = e.target as HTMLTextAreaElement;
-                      target.style.height = "auto"; // 높이 초기화
-                      target.style.height = `${target.scrollHeight}px`; // 내용에 맞게 높이 설정
                       setUserInputData((prev) => {
                         const copy = [...prev];
                         copy[index].input = target.value;
@@ -105,18 +126,30 @@ export default function InputModal({ setInputToggle }: InputModalProps) {
                     }}
                   />
                 </div>
-                <div className="w-2/5 px-4 py-2">
+                <div className="w-2/5 px-4 py-2 flex flex-row items-center justify-between">
                   <textarea
-                    className="w-full resize-none overflow-hidden py-2 px-4 bg-[#E9ECF2] text-gray-600 rounded-sm"
+                    ref={(el) => {
+                      outputRefs.current[index] = el;
+                    }}
+                    className="w-full resize-none overflow-hidden py-2 px-4 bg-[#E9ECF2] text-gray-600 rounded-sm mr-2"
                     rows={1}
                     value={data.expectOutput}
                     onInput={(e) => {
                       const target = e.target as HTMLTextAreaElement;
-                      target.style.height = "auto"; // 높이 초기화
-                      target.style.height = `${target.scrollHeight}px`; // 내용에 맞게 높이 설정
                       setUserInputData((prev) => {
                         const copy = [...prev];
                         copy[index].expectOutput = target.value;
+                        return copy;
+                      });
+                    }}
+                  />
+                  <IoClose
+                    size={25}
+                    color="black"
+                    onClick={() => {
+                      setUserInputData((prev) => {
+                        const copy = [...prev];
+                        copy.splice(index, 1);
                         return copy;
                       });
                     }}
@@ -125,7 +158,6 @@ export default function InputModal({ setInputToggle }: InputModalProps) {
               </div>
             </>
           ))}
-          {/* p가 아니라 input box로 바꿔야한다. */}
         </div>
 
         <div
@@ -138,18 +170,3 @@ export default function InputModal({ setInputToggle }: InputModalProps) {
     </div>
   );
 }
-
-const inputData = [
-  {
-    input: "1 2\n",
-    expectOutput: "3\n",
-  },
-  {
-    input: "1 2\n 3 4\n",
-    expectOutput: "13\n",
-  },
-  {
-    input: "1 2\n 3 4\n",
-    expectOutput: "13\n",
-  },
-];

@@ -22,6 +22,7 @@ export default defineConfig({
       input: {
         sidepanel: resolve(__dirname, "index.html"),
         service_worker: resolve(__dirname, "src/service_worker.ts"),
+        content_script: resolve(__dirname, "src/content_script.ts"),
       },
       output: {
         entryFileNames: "[name].js",

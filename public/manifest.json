@@ -3,7 +3,15 @@
   "name": "김상엽이 만든 앱",
   "version": "1.0",
   "description": "코딩 테스트용 웹 IDE",
+  "permissions": ["sidePanel", "scripting", "tabs"],
   "host_permissions": ["<all_urls>"],
+  "content_scripts": [
+    {
+      "matches": ["https://www.acmicpc.net/problem/*"],
+      "js": ["content_script.js"],
+      "run_at": "document_idle"
+    }
+  ],
   "icons": {
     "16": "icons/icon16.png",
     "32": "icons/icon32.png",
@@ -23,7 +31,7 @@
     "default_path": "index.html"
   },
   "background": {
-    "service_worker": "service_worker.js"
-  },
-  "permissions": ["sidePanel"]
+    "service_worker": "service_worker.js",
+    "type": "module"
+  }
 }

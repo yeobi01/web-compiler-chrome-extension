@@ -3,6 +3,14 @@ import MonacoEditor from "./MonacoEditor";
 import InputModal from "./InputModal";
 import OutputBox from "./OutputBox";
 import ButtomTabBar from "./ButtomTabBar";
+import storage from "../utils/localstorage";
+
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message.type === "BAEKJOON_PROBLEM_DATA") {
+    storage.set("inputData", message.payload);
+    sendResponse({ sender, status: "200" });
+  }
+});
 
 export default function WebCompiler() {
   const [code, setCode] = useState<string>(
