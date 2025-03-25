@@ -1,0 +1,41 @@
+name: 🚀 Refactor Request
+description: 온라인 IDE 크롬익스텐션을 어떻게 리팩토링 할지 작성하세요!
+title: "🔥 [REFACT] "
+labels: ["Refactor"]
+body:
+  - type: textarea
+    attributes:
+      label: ❓ 리팩토링 이유 설명
+      id: refactor-discription
+      description: |
+        리팩토링 하고자하는 이유를 자세히 설명해주세요!
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: ✅ 어떻게 리팩토링할지 설명
+      id: refactor-solution
+      description: |
+        어떻게 리팩토링을 할 것인지 자세하게 설명해주세요!
+      value: |
+        - [ ] task 1
+        - [ ] task 2
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: 📍 More
+      id: refactor-more
+      description: |
+        기타 참고할만한 사항들을 작성해주세요!
+  - type: checkboxes
+    id: refactor-checkboxes
+    attributes:
+      label: CheckList ✔️
+      description: |
+        Issue 올리기 전에 한 번 확인해주세요! 👍
+      options:
+        - label: 관련 Issue 가 이미 존재하는 지 확인해보셨나요?
+          required: true
+        - label: Assignees 설정
+        - label: Labels 설정
