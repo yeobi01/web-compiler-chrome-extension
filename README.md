@@ -6,3 +6,6 @@
 ### 🏃🏻 실행방법
 1. `yarn build` 명령어 실행
 2. `dist 폴더` 크롬익스텐션에 추가
+
+### ⚽️ UI
+<img width="1840" alt="web-compiler-chrome-extension" src="https://github.com/user-attachments/assets/ae80c1af-5388-40f2-a411-da2ac45e9f5d" />
