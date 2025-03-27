@@ -19,19 +19,19 @@ export default function OutputBox({ outputData }: OutputBoxProps) {
         {outputData?.outputs.map((data, index) => (
           <div className="w-full flex flex-col items-start p-2 text-[0.9rem] output-border whitespace-pre-line">
             <p className="font-bold text-gray-300">테스트 {index}</p>
-            <div className="w-full flex flex-row">
+            <div className="w-full flex flex-row text-left">
               <p className="w-1/5 min-w-24 text-right text-gray-600 px-2">
                 입력값 〉
               </p>
               {data.input}
             </div>
-            <div className="w-full flex flex-row">
+            <div className="w-full flex flex-row text-left">
               <p className="w-1/5 min-w-24 text-right text-gray-600 px-2">
                 기댓값 〉
               </p>
               {data.expectedOutput}
             </div>
-            <div className="w-full flex flex-row">
+            <div className="w-full flex flex-row text-left">
               <p className="w-1/5 min-w-24 text-right text-gray-600 px-2">
                 실행 결과 〉
               </p>
