@@ -5,6 +5,8 @@ import OutputBox from "./OutputBox";
 import ButtomTabBar from "./ButtomTabBar";
 import storage from "../utils/localstorage";
 
+import { CompileResponse } from "../types/CompileDTO";
+
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.type === "BAEKJOON_PROBLEM_DATA") {
     storage.set("inputData", message.payload);
@@ -17,15 +19,19 @@ export default function WebCompiler() {
     "// 0번. 문제 이름\n\n#include <bits/stdc++.h>\nusing namespace std;\ntypedef long long ll;\n\nint main(){\n\tcin.tie(0)->sync_with_stdio(0);\n\n\treturn 0;\n}"
   );
   const [inputToggle, setInputToggle] = useState(false);
+  const [outputData, setOutputData] = useState<CompileResponse | null>(null);
 
   return (
     <>
       {inputToggle ? <InputModal setInputToggle={setInputToggle} /> : null}
       <div className="w-[calc(95vw-4rem)] h-[calc(92vh-5.25rem)] py-4 bg-[#1E1E1E] rounded-xl">
         <MonacoEditor codeState={{ code, setCode }} />
-        <OutputBox />
+        <OutputBox outputData={outputData} />
       </div>
-      <ButtomTabBar setInputToggle={setInputToggle} />
+      <ButtomTabBar
+        setInputToggle={setInputToggle}
+        setOutputData={setOutputData}
+      />
     </>
   );
 }

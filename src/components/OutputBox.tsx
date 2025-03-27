@@ -1,4 +1,10 @@
-export default function OutputBox() {
+import { CompileResponse } from "../types/CompileDTO";
+
+interface OutputBoxProps {
+  outputData: CompileResponse | null;
+}
+
+export default function OutputBox({ outputData }: OutputBoxProps) {
   return (
     <div className="h-1/4 flex flex-col px-4 items-start">
       <div className="flex flex-row w-full justify-between items-center mb-2">
@@ -10,7 +16,7 @@ export default function OutputBox() {
             실행 결과가 여기에 표시됩니다.
           </p>
         )}
-        {outputData?.map((data, index) => (
+        {outputData?.outputs.map((data, index) => (
           <div className="w-full flex flex-col items-start p-2 text-[0.9rem] output-border whitespace-pre-line">
             <p className="font-bold text-gray-300">테스트 {index}</p>
             <div className="w-full flex flex-row">
@@ -23,7 +29,7 @@ export default function OutputBox() {
               <p className="w-1/5 min-w-24 text-right text-gray-600 px-2">
                 기댓값 〉
               </p>
-              {data.expectOutput}
+              {data.expectedOutput}
             </div>
             <div className="w-full flex flex-row">
               <p className="w-1/5 min-w-24 text-right text-gray-600 px-2">
@@ -41,33 +47,3 @@ export default function OutputBox() {
     </div>
   );
 }
-
-interface OutputData {
-  input: string;
-  expectOutput: string;
-  realOutput: string;
-  result: boolean;
-}
-
-const outputData: OutputData[] | null = null;
-
-// [
-//   {
-//     input: "1 2\n",
-//     expectOutput: "3\n",
-//     realOutput: "3\n",
-//     result: true,
-//   },
-//   {
-//     input: "1 2\n 3 4\n",
-//     expectOutput: "13\n",
-//     realOutput: "10\n",
-//     result: false,
-//   },
-//   {
-//     input: "1 2\n 3 4\n",
-//     expectOutput: "13\n",
-//     realOutput: "10\n",
-//     result: false,
-//   },
-// ];

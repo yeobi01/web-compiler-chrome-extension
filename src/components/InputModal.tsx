@@ -8,7 +8,7 @@ interface InputModalProps {
 
 interface InputData {
   input: string;
-  expectOutput: string;
+  expectedOutput: string;
 }
 
 export default function InputModal({ setInputToggle }: InputModalProps) {
@@ -19,7 +19,7 @@ export default function InputModal({ setInputToggle }: InputModalProps) {
   const outputRefs = useRef<(HTMLTextAreaElement | null)[]>([]);
 
   const addUserInputData = () => {
-    setUserInputData((prev) => [...prev, { input: "", expectOutput: "" }]);
+    setUserInputData((prev) => [...prev, { input: "", expectedOutput: "" }]);
   };
 
   useEffect(() => {
@@ -97,7 +97,7 @@ export default function InputModal({ setInputToggle }: InputModalProps) {
                 </div>
                 <div className="w-2/5 px-4 py-2">
                   <div className="w-full h-full flex py-2 px-4 justify-start bg-[#E9ECF2] text-gray-600 rounded-sm">
-                    <p className="text-left">{data.expectOutput}</p>
+                    <p className="text-left">{data.expectedOutput}</p>
                   </div>
                 </div>
               </div>
@@ -133,12 +133,12 @@ export default function InputModal({ setInputToggle }: InputModalProps) {
                     }}
                     className="w-full resize-none overflow-hidden py-2 px-4 bg-[#E9ECF2] text-gray-600 rounded-sm mr-2"
                     rows={1}
-                    value={data.expectOutput}
+                    value={data.expectedOutput}
                     onInput={(e) => {
                       const target = e.target as HTMLTextAreaElement;
                       setUserInputData((prev) => {
                         const copy = [...prev];
-                        copy[index].expectOutput = target.value;
+                        copy[index].expectedOutput = target.value;
                         return copy;
                       });
                     }}
