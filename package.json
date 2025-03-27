@@ -14,6 +14,7 @@
     "@monaco-editor/react": "^4.7.0",
     "@tailwindcss/vite": "^4.0.12",
     "@types/chrome": "^0.0.308",
+    "axios": "^1.8.4",
     "monaco-editor": "^0.52.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
