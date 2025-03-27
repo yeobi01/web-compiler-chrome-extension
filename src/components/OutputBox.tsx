@@ -16,7 +16,7 @@ export default function OutputBox({ outputData }: OutputBoxProps) {
             실행 결과가 여기에 표시됩니다.
           </p>
         )}
-        {outputData?.outputs.map((data, index) => (
+        {outputData?.outputs?.map((data, index) => (
           <div className="w-full flex flex-col items-start p-2 text-[0.9rem] output-border whitespace-pre-line">
             <p className="font-bold text-gray-300">테스트 {index}</p>
             <div className="w-full flex flex-row text-left">
