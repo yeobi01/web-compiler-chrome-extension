@@ -1,5 +1,5 @@
-function collectSamples(): { input: string; expectOutput: string }[] {
-  const samples: { input: string; expectOutput: string }[] = [];
+function collectSamples(): { input: string; expectedOutput: string }[] {
+  const samples: { input: string; expectedOutput: string }[] = [];
 
   for (let i = 1; ; i++) {
     const inputExample = document.getElementById(`sample-input-${i}`);
@@ -9,7 +9,7 @@ function collectSamples(): { input: string; expectOutput: string }[] {
 
     samples.push({
       input: inputExample.textContent?.trim() ?? "",
-      expectOutput: outputExample.textContent?.trim() ?? "",
+      expectedOutput: outputExample.textContent?.trim() ?? "",
     });
   }
 
